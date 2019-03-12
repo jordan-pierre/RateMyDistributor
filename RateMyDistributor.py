@@ -33,7 +33,7 @@ def main():
                 if counter(dist_html, brand) > 0:
                     hits.append(brand)
                     number_of_brands += 1
-            dist_row = [dist_url, number_of_brands, hits]
+            dist_row = [dist_url, number_of_brands - 1, hits]
             data.append(dist_row)
         except:
             print("'" + dist_url + "' failed. Skipping URL")
