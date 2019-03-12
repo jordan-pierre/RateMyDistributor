@@ -4,11 +4,20 @@ import pandas as pd
 
 def main():
     # PROVIDE BRANDS TO SEARCH FOR
-    good_brands_file = 'good_brands.txt'  # text file should have one distrbutor per line
+    good_brands_file = input("Input your text file with brands (or press Enter for default):\n")
+    if (good_brands_file == ''):
+        good_brands_file = 'good_brands.txt'  # text file should have one distrbutor per line
 
     # PROVIDE A LIST OF URLS
-    list_of_distributors_urls = '2019_Exhibitors.txt' # 'distributors.txt'
+    list_of_distributors_urls = input("Enter a text file of distributors' URLs (or press Enter for default):\n")
+    if (list_of_distributors_urls == ''):
+        list_of_distributors_urls = '2019_Exhibitors.txt' # 'distributors.txt'
 
+    # PROVIDE OUTPUT CSV NAME
+    csv_name = input("Enter the name of your CSV output file (include .csv) (or press Enter for default:\n")
+    if (csv_name == ''):
+        csv_name = "RateMyDistributor.csv"
+    
     # Store brands as a list
     print("Retreiving brands from '" + good_brands_file + "'...")
     brands = set(line.strip() for line in open(good_brands_file))
@@ -42,7 +51,6 @@ def main():
     # Convert results to CSV file
     print("Finished searching for brands.\nConverting results to CSV...")
     df = pd.DataFrame(data, columns=["Website", "Total", "Hits"])
-    csv_name = "RateMyDistributor.csv"
     df.to_csv(csv_name)
 
     print("Success.  Results can be found in '" + csv_name + "'")
