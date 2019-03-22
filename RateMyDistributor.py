@@ -17,7 +17,7 @@ def main():
     csv_name = input("Enter the name of your CSV output file (include .csv) (or press Enter for default:\n")
     if (csv_name == ''):
         csv_name = "RateMyDistributor.csv"
-    
+
     # Store brands as a list
     print("Retreiving brands from '" + good_brands_file + "'...")
     brands = set(line.strip() for line in open(good_brands_file))
@@ -39,7 +39,7 @@ def main():
             number_of_brands = 0
             for brand in brands:
                 brand = brand.lower()
-                if counter(dist_html, brand) > 0:
+                if brand in dist_html:
                     hits.append(brand)
                     number_of_brands += 1
             dist_row = [dist_url, number_of_brands - 1, hits]
@@ -54,17 +54,6 @@ def main():
     df.to_csv(csv_name)
 
     print("Success.  Results can be found in '" + csv_name + "'")
-
-
-def counter(string, substring):
-    string_size = len(string)
-    substring_size = len(substring)
-    count = 0
-    for i in range(0, string_size - substring_size + 1):
-        if string[i:i + substring_size] == substring:
-            count += 1
-            break # no need to actually count occurances
-    return count
 
 if __name__ == '__main__':
     main()
